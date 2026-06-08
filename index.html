@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Framework W3.CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <title>Ranne Care – Saúde Mental Corporativa</title>
+
+  <style>
+    /* ===== VARIÁVEIS DE COR ===== */
+    :root {
+      --verde:       #3a7d44;
+      --verde-claro: #5aab5e;
+      --verde-suave: #d4edda;
+      --bege:        #f5f0e8;
+      --bege-escuro: #e8dfc8;
+      --texto-escuro: #2c2c2c;
+      --texto-medio:  #555;
+    }
+
+    /* ===== FONTE GLOBAL ===== */
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Nunito", sans-serif;
+      color: var(--texto-escuro);
+    }
+
+    body {
+      background-color: var(--bege);
+    }
+
+    /* ===== SIDEBAR ===== */
+    .w3-sidebar {
+      width: 130px;
+      background: var(--verde);
+    }
+
+    .w3-sidebar a {
+      color: #fff !important;
+      transition: background 0.2s;
+    }
+
+    .w3-sidebar a:hover {
+      background: var(--verde-claro) !important;
+      color: #fff !important;
+    }
+
+    /* ===== CONTEÚDO PRINCIPAL ===== */
+    #main {
+      margin-left: 130px;
+      background: var(--bege);
+    }
+
+    @media only screen and (max-width: 600px) {
+      #main { margin-left: 0; }
+    }
+
+    .w3-row-padding img { margin-bottom: 12px; }
+
+    /* ===== CABEÇALHO DAS SEÇÕES ===== */
+    .section-header {
+      background: linear-gradient(135deg, var(--verde) 0%, var(--verde-claro) 100%);
+      color: #fff;
+      padding: 40px 20px 30px;
+      text-align: center;
+    }
+    .section-header h1 { font-size: 1.9rem; margin: 8px 0 4px; color: #fff; }
+    .section-header p  { color: var(--bege); font-size: 0.95rem; margin: 0; }
+
+    /* Logo circular */
+    .logo-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #fff;
+      font-size: 1.5rem;
+      color: var(--verde);
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -1px;
+    }
+
+    /* ===== CARDS ===== */
+    .card-verde {
+      background: #fff;
+      border-top: 4px solid var(--verde);
+      border-radius: 8px;
+      padding: 24px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .card-verde i { color: var(--verde); }
+    .card-verde h3 { color: var(--verde); }
+    .card-verde p { color: var(--texto-medio); font-size: .9rem; }
+
+    /* ===== NÚMEROS DESTAQUE ===== */
+    .destaque-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--verde);
+    }
+    .destaque-row {
+      background: var(--bege-escuro);
+      border-radius: 8px;
+      padding: 20px 0;
+      margin-top: 24px;
+    }
+
+    /* ===== SLIDESHOW ===== */
+    .slide-container {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .slide-placeholder {
+      display: none;
+      width: 100%;
+      min-height: 320px;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 32px 24px;
+    }
+    .slide-placeholder.ativo { display: flex; }
+
+    .slide-placeholder i {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .slide-placeholder p {
+      color: rgba(255,255,255,0.9);
+      font-size: .9rem;
+      font-weight: 400;
+      max-width: 460px;
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+
+    .btn-slide {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(58, 125, 68, 0.75);
+      color: #fff;
+      border: none;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      border-radius: 6px;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+    .btn-slide:hover { background: var(--verde); }
+    .btn-prev { left: 8px; }
+    .btn-next { right: 8px; }
+
+    #slide-indicator {
+      text-align: center;
+      color: var(--texto-medio);
+      font-size: .85rem;
+      margin-top: 12px;
+    }
+
+    /* ===== PARCEIROS ===== */
+    .parceiro-card {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 70px;
+      border-radius: 10px;
+      margin: 10px;
+      font-weight: 700;
+      font-size: .9rem;
+      color: #fff;
+      letter-spacing: .5px;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      border-left: 4px solid var(--verde);
+      padding-left: 16px;
+      margin-bottom: 24px;
+      background: #fff;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 16px 16px 20px;
+    }
+    .faq-item .pergunta {
+      font-weight: 700;
+      color: var(--verde);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    .faq-item .resposta {
+      color: var(--texto-medio);
+      font-size: .92rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ===== RODAPÉ ===== */
+    .rodape {
+      background: var(--verde);
+      padding: 24px;
+      text-align: center;
+    }
+    .rodape a { color: var(--bege); margin: 0 8px; font-size: 1.4rem; transition: opacity .2s; }
+    .rodape a:hover { opacity: .7; }
+    .rodape p { color: var(--bege-escuro); font-size: .9rem; margin: 10px 0 0; }
+
+    /* ===== FORMULÁRIO ===== */
+    .meu-input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--bege-escuro);
+      border-radius: 6px;
+      background: #fff;
+      font-family: "Nunito", sans-serif;
+      font-size: .95rem;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border .2s;
+    }
+    .meu-input:focus { border-color: var(--verde); }
+
+    .btn-enviar {
+      background: var(--verde);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-family: "Nunito", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-enviar:hover { background: var(--verde-claro); }
+
+    /* ===== CONTATO INFO ===== */
+    .contato-info p {
+      color: var(--texto-medio);
+      margin-bottom: 12px;
+      font-size: .95rem;
+    }
+    .contato-info i { color: var(--verde); margin-right: 10px; width: 20px; }
+
+    /* seção w3-content padding padrão */
+    .secao { padding: 48px 16px; max-width: 900px; margin: 0 auto; }
+
+    h2.titulo-secao {
+      color: var(--verde);
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+    hr.linha { width: 200px; border-color: var(--bege-escuro); margin: 8px 0 24px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SIDEBAR – visível em telas grandes e médias
+  ============================================================ -->
+  <nav class="w3-sidebar w3-bar-block w3-center w3-hide-small">
+
+    <a href="#home" class="w3-bar-item w3-button w3-padding-large">
+      <i class="fa fa-home w3-xxlarge"></i>
+      <p>HOME</p>
+    </a>
+
+    <a href="#servicos" class="w3-bar-item w3-button w3-padding-large">
+      <i class="fa fa-th-large w3-xxlarge"></i>
+      <p>SERVIÇOS</p>
+    </a>
+
+    <a href="#parceiros" class="w3-bar-item w3-button w3-padding-large">
+      <i class="fa fa-handshake-o w3-xxlarge"></i>
+      <p>PARCEIROS</p>
+    </a>
+
+    <a href="#faq" class="w3-bar-item w3-button w3-padding-large">
+      <i class="fa fa-question-circle w3-xxlarge"></i>
+      <p>FAQ</p>
+    </a>
+
+    <a href="#contato" class="w3-bar-item w3-button w3-padding-large">
+      <i class="fa fa-envelope w3-xxlarge"></i>
+      <p>CONTATO</p>
+    </a>
+
+  </nav>
+
+  <!-- ============================================================
+       NAVBAR TOPO – visível apenas em telas pequenas (celular)
+  ============================================================ -->
+  <div class="w3-top w3-hide-large w3-hide-medium">
+    <nav class="w3-bar w3-center" style="background:var(--verde)">
+      <a href="#home"      class="w3-bar-item w3-button w3-small" style="width:20%;color:#fff">HOME</a>
+      <a href="#servicos"  class="w3-bar-item w3-button w3-small" style="width:20%;color:#fff">SERVIÇOS</a>
+      <a href="#parceiros" class="w3-bar-item w3-button w3-small" style="width:20%;color:#fff">PARCEIROS</a>
+      <a href="#faq"       class="w3-bar-item w3-button w3-small" style="width:20%;color:#fff">FAQ</a>
+      <a href="#contato"   class="w3-bar-item w3-button w3-small" style="width:20%;color:#fff">CONTATO</a>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       CONTEÚDO PRINCIPAL
+  ============================================================ -->
+  <div id="main">
+
+    <!-- ==================== HOME ==================== -->
+    <section id="home">
+
+      <!-- Cabeçalho -->
+      <header class="section-header">
+        <div class="logo-box">RC</div>
+        <h1>Ranne Care</h1>
+        <p>Tecnologia que cuida de quem faz sua empresa crescer</p>
+      </header>
+
+      <div class="secao">
+
+        <!-- História -->
+        <h2 class="titulo-secao">Nossa História</h2>
+        <hr class="linha">
+        <p style="line-height:1.8; color:var(--texto-medio)">
+          A <strong style="color:var(--verde)">Ranne Care</strong> nasceu em 2021 da percepção de que
+          as empresas investem muito em produtividade, mas pouco em quem produz. Fundada por
+          especialistas em psicologia organizacional e tecnologia, desenvolvemos um aplicativo
+          que permite às empresas monitorar, de forma ética e anônima, a saúde mental dos seus
+          colaboradores por meio de testes validados cientificamente. Hoje atendemos mais de
+          150 empresas em todo o Brasil, impactando a vida de milhares de profissionais.
+        </p>
+
+        <!-- Missão, Visão, Valores -->
+        <h2 class="titulo-secao w3-margin-top">Missão &amp; Valores</h2>
+        <hr class="linha">
+
+        <div class="w3-row w3-row-padding">
+
+          <div class="w3-third">
+            <div class="card-verde">
+              <i class="fa fa-heart w3-xxlarge"></i>
+              <h3>Missão</h3>
+              <p>Promover ambientes de trabalho mais saudáveis por meio de tecnologia acessível e humanizada.</p>
+            </div>
+          </div>
+
+          <div class="w3-third">
+            <div class="card-verde">
+              <i class="fa fa-eye w3-xxlarge"></i>
+              <h3>Visão</h3>
+              <p>Ser referência nacional em saúde mental corporativa até 2027, reconhecida pela ética e inovação.</p>
+            </div>
+          </div>
+
+          <div class="w3-third">
+            <div class="card-verde">
+              <i class="fa fa-leaf w3-xxlarge"></i>
+              <h3>Valores</h3>
+              <p>Empatia, privacidade, transparência, ciência e responsabilidade com o bem-estar humano.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Números -->
+        <div class="destaque-row w3-row w3-center">
+          <div class="w3-third w3-section">
+            <span class="destaque-num">150+</span>
+            <br><span style="color:var(--texto-medio)">Empresas atendidas</span>
+          </div>
+          <div class="w3-third w3-section">
+            <span class="destaque-num">40 mil+</span>
+            <br><span style="color:var(--texto-medio)">Colaboradores impactados</span>
+          </div>
+          <div class="w3-third w3-section">
+            <span class="destaque-num">3 anos</span>
+            <br><span style="color:var(--texto-medio)">de mercado</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Rodapé HOME -->
+      <div class="rodape">
+        <a href="https://facebook.com"  target="_blank"><i class="fa fa-facebook-official"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://twitter.com"   target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="https://linkedin.com"  target="_blank"><i class="fa fa-linkedin"></i></a>
+        <p><i class="fa fa-envelope"></i> contato@rannecare.com.br &nbsp;|&nbsp; <i class="fa fa-phone"></i> (11) 4002-8922</p>
+      </div>
+
+    </section>
+
+    <hr style="border-color:var(--bege-escuro)">
+
+    <!-- ==================== SERVIÇOS (Ag16 – Slideshow) ==================== -->
+    <section id="servicos">
+
+      <header class="section-header">
+        <div class="logo-box">RC</div>
+        <h1>Ranne Care</h1>
+        <p>Tecnologia que cuida de quem faz sua empresa crescer</p>
+      </header>
+
+      <div class="secao">
+
+        <h2 class="titulo-secao">Nossos Serviços &amp; Produtos</h2>
+        <hr class="linha">
+        <p style="color:var(--texto-medio); margin-bottom:32px">
+          Use as setas para conhecer nossas soluções.
+        </p>
+
+        <!-- SLIDESHOW MANUAL -->
+        <div class="slide-container">
+
+          <button class="btn-slide btn-prev" onclick="plusSlides(-1)">&#10094;</button>
+
+          <!-- Slide 1 -->
+          <div class="slide-placeholder" style="background:linear-gradient(135deg,#3a7d44,#5aab5e)">
+            <i class="fa fa-mobile"></i>
+            <strong style="font-size:1.3rem">Aplicativo Ranne Care</strong>
+            <p>Plataforma mobile e web que aplica testes de saúde mental validados cientificamente para os colaboradores, com resultados anônimos e seguros para o RH.</p>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="slide-placeholder" style="background:linear-gradient(135deg,#2d6a4f,#52b788)">
+            <i class="fa fa-bar-chart"></i>
+            <strong style="font-size:1.3rem">Dashboard Gerencial</strong>
+            <p>Painel interativo para gestores acompanharem indicadores coletivos de bem-estar da equipe, identificando pontos de atenção sem expor indivíduos.</p>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="slide-placeholder" style="background:linear-gradient(135deg,#1b4332,#40916c)">
+            <i class="fa fa-bell"></i>
+            <strong style="font-size:1.3rem">Alertas Inteligentes</strong>
+            <p>Sistema de notificações automáticas que avisa o RH quando indicadores coletivos atingem níveis críticos, permitindo ação preventiva rápida.</p>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="slide-placeholder" style="background:linear-gradient(135deg,#606c38,#dda15e)">
+            <i class="fa fa-graduation-cap"></i>
+            <strong style="font-size:1.3rem">Treinamentos &amp; Workshops</strong>
+            <p>Conteúdos educativos sobre saúde mental no trabalho disponíveis dentro do aplicativo, com trilhas personalizadas para líderes e colaboradores.</p>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="slide-placeholder" style="background:linear-gradient(135deg,#588157,#a3b18a)">
+            <i class="fa fa-lock"></i>
+            <strong style="font-size:1.3rem">Privacidade &amp; LGPD</strong>
+            <p>Toda a plataforma é desenvolvida em conformidade com a LGPD. Os dados individuais são criptografados e jamais compartilhados sem consentimento.</p>
+          </div>
+
+          <button class="btn-slide btn-next" onclick="plusSlides(1)">&#10095;</button>
+
+        </div>
+
+        <p id="slide-indicator">Slide 1 de 5</p>
+
+      </div>
+
+      <!-- Rodapé SERVIÇOS -->
+      <div class="rodape">
+        <a href="https://facebook.com"  target="_blank"><i class="fa fa-facebook-official"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://twitter.com"   target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="https://linkedin.com"  target="_blank"><i class="fa fa-linkedin"></i></a>
+        <p><i class="fa fa-envelope"></i> contato@rannecare.com.br &nbsp;|&nbsp; <i class="fa fa-phone"></i> (11) 4002-8922</p>
+      </div>
+
+    </section>
+
+    <hr style="border-color:var(--bege-escuro)">
+
+    <!-- ==================== PARCEIROS ==================== -->
+    <section id="parceiros">
+
+      <header class="section-header">
+        <div class="logo-box">RC</div>
+        <h1>Ranne Care</h1>
+        <p>Tecnologia que cuida de quem faz sua empresa crescer</p>
+      </header>
+
+      <div class="secao w3-center">
+
+        <h2 class="titulo-secao">Nossos Parceiros</h2>
+        <hr class="linha" style="margin:8px auto 24px">
+        <p style="color:var(--texto-medio)">Trabalhamos com organizações que compartilham nossos valores.</p>
+
+        <div class="w3-margin-top">
+
+          <div class="parceiro-card" style="background:linear-gradient(135deg,#3a7d44,#5aab5e)">
+            <i class="fa fa-stethoscope" style="margin-right:8px"></i>Unimed
+          </div>
+
+          <div class="parceiro-card" style="background:linear-gradient(135deg,#2d6a4f,#52b788)">
+            <i class="fa fa-building" style="margin-right:8px"></i>SESI
+          </div>
+
+          <div class="parceiro-card" style="background:linear-gradient(135deg,#606c38,#dda15e)">
+            <i class="fa fa-graduation-cap" style="margin-right:8px"></i>FGV Saúde
+          </div>
+
+          <div class="parceiro-card" style="background:linear-gradient(135deg,#588157,#a3b18a)">
+            <i class="fa fa-users" style="margin-right:8px"></i>ABRH Brasil
+          </div>
+
+          <div class="parceiro-card" style="background:linear-gradient(135deg,#1b4332,#40916c)">
+            <i class="fa fa-cloud" style="margin-right:8px"></i>AWS Health
+          </div>
+
+          <div class="parceiro-card" style="background:linear-gradient(135deg,#3a7d44,#a3b18a)">
+            <i class="fa fa-lock" style="margin-right:8px"></i>ANPD
+          </div>
+
+        </div>
+
+        <p style="color:var(--texto-medio); margin-top:24px; font-size:.85rem">
+          Quer ser parceiro? <a href="#contato" style="color:var(--verde); font-weight:700">Fale conosco.</a>
+        </p>
+
+      </div>
+
+      <!-- Rodapé PARCEIROS -->
+      <div class="rodape">
+        <a href="https://facebook.com"  target="_blank"><i class="fa fa-facebook-official"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://twitter.com"   target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="https://linkedin.com"  target="_blank"><i class="fa fa-linkedin"></i></a>
+        <p><i class="fa fa-envelope"></i> contato@rannecare.com.br &nbsp;|&nbsp; <i class="fa fa-phone"></i> (11) 4002-8922</p>
+      </div>
+
+    </section>
+
+    <hr style="border-color:var(--bege-escuro)">
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq">
+
+      <header class="section-header">
+        <div class="logo-box">RC</div>
+        <h1>Ranne Care</h1>
+        <p>Tecnologia que cuida de quem faz sua empresa crescer</p>
+      </header>
+
+      <div class="secao">
+
+        <h2 class="titulo-secao">Perguntas Frequentes</h2>
+        <hr class="linha">
+
+        <div class="faq-item">
+          <p class="pergunta"><i class="fa fa-question-circle"></i> O que é o Ranne Care?</p>
+          <p class="resposta">O Ranne Care é um aplicativo que permite às empresas monitorar coletivamente a saúde mental dos seus colaboradores por meio de testes psicológicos validados, gerando relatórios anônimos para o setor de RH.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="pergunta"><i class="fa fa-question-circle"></i> Os dados dos colaboradores são sigilosos?</p>
+          <p class="resposta">Sim, totalmente. Os resultados individuais são criptografados e o RH recebe apenas dados coletivos e anônimos. A plataforma segue rigorosamente a LGPD.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="pergunta"><i class="fa fa-question-circle"></i> Como funciona a implantação na empresa?</p>
+          <p class="resposta">Após a contratação, nossa equipe realiza uma reunião de onboarding, configura a plataforma com as cores e identidade da empresa, e treina o time de RH. O processo leva em média 5 dias úteis.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="pergunta"><i class="fa fa-question-circle"></i> Os testes são validados cientificamente?</p>
+          <p class="resposta">Sim. Utilizamos instrumentos reconhecidos pela psicologia, como o PHQ-9 (rastreio de depressão) e o GAD-7 (ansiedade), adaptados para o contexto corporativo e revisados por psicólogos parceiros.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="pergunta"><i class="fa fa-question-circle"></i> Qual o tamanho mínimo de equipe para contratar?</p>
+          <p class="resposta">Atendemos empresas a partir de 10 colaboradores. Temos planos para pequenas, médias e grandes empresas, com preços proporcionais ao número de usuários.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="pergunta"><i class="fa fa-question-circle"></i> É possível testar antes de contratar?</p>
+          <p class="resposta">Sim! Oferecemos um período de teste gratuito de 30 dias para até 20 colaboradores, sem necessidade de cartão de crédito. Entre em contato para solicitar.</p>
+        </div>
+
+      </div>
+
+      <!-- Rodapé FAQ -->
+      <div class="rodape">
+        <a href="https://facebook.com"  target="_blank"><i class="fa fa-facebook-official"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://twitter.com"   target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="https://linkedin.com"  target="_blank"><i class="fa fa-linkedin"></i></a>
+        <p><i class="fa fa-envelope"></i> contato@rannecare.com.br &nbsp;|&nbsp; <i class="fa fa-phone"></i> (11) 4002-8922</p>
+      </div>
+
+    </section>
+
+    <hr style="border-color:var(--bege-escuro)">
+
+    <!-- ==================== CONTATO ==================== -->
+    <section id="contato">
+
+      <header class="section-header">
+        <div class="logo-box">RC</div>
+        <h1>Ranne Care</h1>
+        <p>Tecnologia que cuida de quem faz sua empresa crescer</p>
+      </header>
+
+      <div class="secao">
+
+        <h2 class="titulo-secao">Contato</h2>
+        <hr class="linha">
+
+        <!-- Informações -->
+        <div class="contato-info w3-margin-bottom">
+          <p><i class="fa fa-map-marker"></i> Av. Paulista, 1000 – São Paulo, SP – Brasil</p>
+          <p><i class="fa fa-phone"></i> (11) 4002-8922</p>
+          <p><i class="fa fa-envelope"></i> contato@rannecare.com.br</p>
+        </div>
+
+        <!-- Formulário -->
+        <p style="font-weight:700; color:var(--verde)">Envie uma mensagem:</p>
+
+        <form>
+          <input class="meu-input" type="text"  placeholder="Nome"     required name="Nome">
+          <input class="meu-input" type="email" placeholder="E-mail"   required name="Email">
+          <input class="meu-input" type="text"  placeholder="Assunto"  required name="Assunto">
+          <input class="meu-input" type="text"  placeholder="Mensagem" required name="Mensagem">
+          <button class="btn-enviar" type="submit">
+            <i class="fa fa-paper-plane"></i> Enviar mensagem
+          </button>
+        </form>
+
+      </div>
+
+      <!-- Rodapé CONTATO (global) -->
+      <div class="rodape">
+        <a href="https://facebook.com"  target="_blank"><i class="fa fa-facebook-official"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://snapchat.com"  target="_blank"><i class="fa fa-snapchat"></i></a>
+        <a href="https://pinterest.com" target="_blank"><i class="fa fa-pinterest-p"></i></a>
+        <a href="https://twitter.com"   target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="https://linkedin.com"  target="_blank"><i class="fa fa-linkedin"></i></a>
+        <p><i class="fa fa-envelope"></i> contato@rannecare.com.br &nbsp;|&nbsp; <i class="fa fa-phone"></i> (11) 4002-8922</p>
+        <p style="font-size:.8rem; opacity:.7">&copy; 2024 Ranne Care – Todos os direitos reservados.</p>
+      </div>
+
+    </section>
+
+  </div><!-- /#main -->
+
+  <!-- ============================================================
+       JAVASCRIPT – SLIDESHOW MANUAL (Agenda 16)
+  ============================================================ -->
+  <script>
+    // Índice do slide atual
+    var slideIndex = 1;
+
+    // Mostra o primeiro slide ao carregar a página
+    mostrarSlide(slideIndex);
+
+    // Avança ou retrocede o slide
+    function plusSlides(n) {
+      mostrarSlide(slideIndex += n);
+    }
+
+    // Exibe o slide de número n
+    function mostrarSlide(n) {
+      var i;
+      var slides = document.getElementsByClassName("slide-placeholder");
+      var total  = slides.length;
+
+      // Loop circular
+      if (n > total) { slideIndex = 1; }
+      if (n < 1)     { slideIndex = total; }
+
+      // Esconde todos
+      for (i = 0; i < total; i++) {
+        slides[i].classList.remove("ativo");
+      }
+
+      // Mostra o atual
+      slides[slideIndex - 1].classList.add("ativo");
+
+      // Atualiza indicador
+      document.getElementById("slide-indicator").textContent =
+        "Slide " + slideIndex + " de " + total;
+    }
+  </script>
+
+</body>
+</html>
